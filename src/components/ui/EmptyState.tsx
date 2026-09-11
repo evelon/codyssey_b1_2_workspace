@@ -1,3 +1,5 @@
+import { IconMoodEmpty } from "@tabler/icons-react";
+
 import styles from "./EmptyState.module.css";
 
 export function EmptyState({
@@ -7,6 +9,7 @@ export function EmptyState({
 }) {
   return (
     <div className={styles.container}>
+      <IconMoodEmpty size={20} />
       <p>{message}</p>
     </div>
   );

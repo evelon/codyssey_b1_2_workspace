@@ -7,3 +7,7 @@
   --color-border: #e5e7eb;
   --color-bg: #ffffff;
 }
+
+* *::after *::before {
+  box-sizing: border-box;
+}
