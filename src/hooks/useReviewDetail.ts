@@ -37,6 +37,7 @@ export function useReviewDetail(id: string): UseReviewDetailResult {
         imdbId: data.imdb_id,
         title: data.title,
         posterUrl: data.poster_url,
+        year: data.year,
         rating: data.rating,
         reviewText: data.review_text,
         createdAt: data.created_at,

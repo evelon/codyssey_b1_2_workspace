@@ -6,10 +6,10 @@ import { ErrorState } from "../components/ui/ErrorState";
 import { Input } from "../components/ui/Input";
 import { Loading } from "../components/ui/Loading";
 import { type SearchResult, useMovieSearch } from "../hooks/useMovieSearch";
-import { MovieSearchResult } from "./ReviewFormPage/MovieSearchResult";
-import { ReviewForm } from "./ReviewFormPage/ReviewForm";
+import { CreateReviewForm } from "./CreateReviewFormPage/CreateReviewForm";
+import { MovieSearchResult } from "./CreateReviewFormPage/MovieSearchResult";
 
-export default function ReviewFormPage() {
+export function CreateReviewFormPage() {
   const navigate = useNavigate();
 
   const [keyword, setKeyword] = useState("");
@@ -17,7 +17,7 @@ export default function ReviewFormPage() {
   const [selectedMovie, setSelectedMovie] = useState<SearchResult | null>(null);
 
   return selectedMovie ? (
-    <ReviewForm
+    <CreateReviewForm
       movie={selectedMovie}
       onCancel={() => setSelectedMovie(null)}
       onSuccess={(id) => {

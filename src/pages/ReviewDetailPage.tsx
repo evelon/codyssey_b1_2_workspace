@@ -7,7 +7,7 @@ import { Loading } from "../components/ui/Loading";
 import { useReviewDetail } from "../hooks/useReviewDetail";
 import { supabase } from "../lib/supabase";
 
-export default function ReviewDetailPage() {
+export function ReviewDetailPage() {
   const [deleteError, setDeleteError] = useState<string | null>(null);
 
   const navigate = useNavigate();
@@ -44,6 +44,7 @@ export default function ReviewDetailPage() {
         <div>포스터 없음</div>
       )}
       <h2>{review.title}</h2>
+      <p>year</p>
       <p>
         {review.watchedDate} {review.rating && `. ⭐️ ${review.rating}`}
       </p>

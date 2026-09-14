@@ -3,19 +3,23 @@ import React, { useState } from "react";
 import { Button } from "../../components/ui/Button";
 import { ErrorState } from "../../components/ui/ErrorState";
 import { Input } from "../../components/ui/Input";
-import { type SearchResult } from "../../hooks/useMovieSearch";
 import { supabase } from "../../lib/supabase";
+import type { Review } from "../../lib/types";
 
 type ReviewFormProps = {
-  movie: SearchResult;
+  review: Review;
   onCancel: () => void;
   onSuccess: (id: string) => void;
 };
 
-export function ReviewForm({ movie, onCancel, onSuccess }: ReviewFormProps) {
-  const [watchedDate, setWatchedDate] = useState<string>("");
-  const [rating, setRating] = useState("");
-  const [reviewText, setReviewText] = useState("");
+export function EditReviewForm({
+  review,
+  onCancel,
+  onSuccess,
+}: ReviewFormProps) {
+  const [watchedDate, setWatchedDate] = useState<string>(review.watchedDate);
+  const [rating, setRating] = useState(String(review.rating ?? ""));
+  const [reviewText, setReviewText] = useState(review.reviewText ?? "");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [errors, setErrors] = useState<{
@@ -40,14 +44,12 @@ export function ReviewForm({ movie, onCancel, onSuccess }: ReviewFormProps) {
 
     const { data, error } = await supabase
       .from("movie_reviews")
-      .insert({
+      .update({
         watched_date: watchedDate,
-        imdb_id: movie.imdbId,
-        title: movie.title,
-        poster_url: movie.posterUrl,
         rating: Number(rating),
         review_text: reviewText,
       })
+      .eq("id", review.id)
       .select()
       .single();
 
@@ -63,10 +65,14 @@ export function ReviewForm({ movie, onCancel, onSuccess }: ReviewFormProps) {
   return (
     <div>
       <figure>
-        <img src={movie.posterUrl} alt={movie.title} />
+        {review.posterUrl ? (
+          <img src={review.posterUrl} alt={review.title} />
+        ) : (
+          <div>포스터 없음</div>
+        )}
         <figcaption>
-          <span>{movie.title}</span>
-          <span>({movie.year})</span>
+          <span>{review.title}</span>
+          <span>({review.year})</span>
         </figcaption>
       </figure>
       <form onSubmit={handleSubmit}>

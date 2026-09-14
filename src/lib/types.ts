@@ -7,4 +7,5 @@ export type Review = {
   rating: number | null;
   reviewText: string | null;
   createdAt: string;
+  year: string | null;
 };

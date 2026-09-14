@@ -24,6 +24,7 @@ export type Database = {
           review_text: string | null
           title: string
           watched_date: string
+          year: string | null
         }
         Insert: {
           created_at?: string
@@ -34,6 +35,7 @@ export type Database = {
           review_text?: string | null
           title: string
           watched_date: string
+          year?: string | null
         }
         Update: {
           created_at?: string
@@ -44,6 +46,7 @@ export type Database = {
           review_text?: string | null
           title?: string
           watched_date?: string
+          year?: string | null
         }
         Relationships: []
       }

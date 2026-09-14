@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router";
 
-export default function Layout() {
+export function Layout() {
   return (
     <div>
       <header>

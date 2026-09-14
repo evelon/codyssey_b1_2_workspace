@@ -1,3 +1,3 @@
-export default function StatsPage() {
+export function StatsPage() {
   return <div>Stats</div>;
 }
