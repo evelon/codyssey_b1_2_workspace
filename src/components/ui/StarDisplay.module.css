@@ -1,0 +1,16 @@
+.star {
+  background-color: transparent;
+  border: transparent;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 2px;
+}
+
+.star[data-filled="true"] {
+  color: gold;
+}
+
+.star[data-filled="false"] {
+  color: var(--color-bg);
+  -webkit-text-stroke: 1px;
+}
