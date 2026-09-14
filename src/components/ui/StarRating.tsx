@@ -18,7 +18,6 @@ export function StarRating({ value, onChange }: StarRatingProps) {
           type="button"
           onClick={() => onChange(star)}
           onMouseEnter={() => setHoveredValue(star)}
-          onMouseLeave={() => setHoveredValue(null)}
           className={styles.star}
           data-filled={star <= displayValue}
           aria-label={`${star}점`}
