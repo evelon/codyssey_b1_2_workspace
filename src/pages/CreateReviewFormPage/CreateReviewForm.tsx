@@ -4,6 +4,7 @@ import { Button } from "../../components/ui/Button";
 import { ErrorState } from "../../components/ui/ErrorState";
 import { FormField } from "../../components/ui/FormField";
 import { Input } from "../../components/ui/Input";
+import { MoviePoster } from "../../components/ui/MoviePoster";
 import { StarRating } from "../../components/ui/StarRating";
 import { type SearchResult } from "../../hooks/useMovieSearch";
 import { supabase } from "../../lib/supabase";
@@ -69,7 +70,7 @@ export function CreateReviewForm({
   return (
     <div>
       <figure>
-        <img src={movie.posterUrl} alt={movie.title} />
+        <MoviePoster posterUrl={movie.posterUrl} title={movie.title} />
         <figcaption>
           <span>{movie.title}</span>
           <span>({movie.year})</span>
@@ -83,8 +84,8 @@ export function CreateReviewForm({
           error={errors.watchedDate}
           type="date"
         />
-        <FormField label="별점">
-          <StarRating value={0} onChange={setRating} />
+        <FormField label="별점" error={errors.rating}>
+          <StarRating value={rating ?? 0} onChange={setRating} />
         </FormField>
         <Input label="리뷰" value={reviewText} onChange={setReviewText} />
         <Button type="submit" isLoading={submitting}>

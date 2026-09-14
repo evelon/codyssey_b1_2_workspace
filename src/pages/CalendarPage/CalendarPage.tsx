@@ -1,4 +1,5 @@
 import {
+  addMonths,
   eachDayOfInterval,
   endOfMonth,
   endOfWeek,
@@ -6,6 +7,7 @@ import {
   isSameMonth,
   startOfMonth,
   startOfWeek,
+  subMonths,
 } from "date-fns";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -32,7 +34,7 @@ function groupReviewByDate(reviews: Review[]): Record<string, Review[]> {
 export function CalendarPage() {
   const navigate = useNavigate();
   const { reviews, loading, error } = useReviews();
-  const [currentDate] = useState(() => new Date());
+  const [currentDate, setCurrentDate] = useState(() => new Date());
 
   if (loading) return <Loading />;
   if (error) return <ErrorState message={error} />;
@@ -46,25 +48,45 @@ export function CalendarPage() {
   const groupedReview = groupReviewByDate(reviews);
 
   return (
-    <ul className={styles.calendar}>
-      {days.map((day) => {
-        const dayKey = format(day, "yyyy-MM-dd");
-        const reviewsOnThisDay = groupedReview[dayKey] ?? [];
-        return (
-          <li key={dayKey} data-outside-month={!isSameMonth(day, currentDate)}>
-            <span>{format(day, "d")}</span>
-            {reviewsOnThisDay.map((review) => {
-              return (
-                <ReviewCard
-                  key={review.id}
-                  review={review}
-                  onClick={() => navigate(`/reviews/${review.id}`)}
-                />
-              );
-            })}
-          </li>
-        );
-      })}
-    </ul>
+    <>
+      <div>
+        <button
+          type="button"
+          onClick={() => setCurrentDate(subMonths(currentDate, 1))}
+        >
+          이전 달
+        </button>
+        <span>{format(currentDate, "yyyy년 M월")}</span>
+        <button
+          type="button"
+          onClick={() => setCurrentDate(addMonths(currentDate, 1))}
+        >
+          다음 달
+        </button>
+      </div>
+      <ul className={styles.calendar}>
+        {days.map((day) => {
+          const dayKey = format(day, "yyyy-MM-dd");
+          const reviewsOnThisDay = groupedReview[dayKey] ?? [];
+          return (
+            <li
+              key={dayKey}
+              data-outside-month={!isSameMonth(day, currentDate)}
+            >
+              <span>{format(day, "d")}</span>
+              {reviewsOnThisDay.map((review) => {
+                return (
+                  <ReviewCard
+                    key={review.id}
+                    review={review}
+                    onClick={() => navigate(`/reviews/${review.id}`)}
+                  />
+                );
+              })}
+            </li>
+          );
+        })}
+      </ul>
+    </>
   );
 }

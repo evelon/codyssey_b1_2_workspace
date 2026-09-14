@@ -1,6 +1,5 @@
 import { FormField } from "./FormField";
 import styles from "./Input.module.css";
-
 type InputProps = {
   label: string;
   value: string;
@@ -14,6 +13,8 @@ export function Input({ label, error, ...inputProps }: InputProps) {
   return (
     <FormField label={label} error={error}>
       <input
+        className={styles.input}
+        data-error={!!error}
         {...inputProps}
         onChange={(e) => {
           inputProps.onChange(e.target.value);

@@ -1,4 +1,5 @@
 import { Card } from "../../components/ui/Card";
+import { MoviePoster } from "../../components/ui/MoviePoster";
 import { StarDisplay } from "../../components/ui/StarDisplay";
 import type { Review } from "../../lib/types";
 
@@ -12,11 +13,7 @@ export function ReviewCard({ review, onClick }: ReviewCardProps) {
     <button type="button" onClick={onClick}>
       <Card padding="sm">
         <article>
-          {review.posterUrl ? (
-            <img src={review.posterUrl} />
-          ) : (
-            <div>포스터 없음</div>
-          )}
+          <MoviePoster posterUrl={review.posterUrl} title={review.title} />
           <h3>{review.title}</h3>
           {review.rating !== null && <StarDisplay value={review.rating} />}
         </article>

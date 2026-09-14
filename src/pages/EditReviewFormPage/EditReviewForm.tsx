@@ -4,6 +4,7 @@ import { Button } from "../../components/ui/Button";
 import { ErrorState } from "../../components/ui/ErrorState";
 import { FormField } from "../../components/ui/FormField";
 import { Input } from "../../components/ui/Input";
+import { MoviePoster } from "../../components/ui/MoviePoster";
 import { StarRating } from "../../components/ui/StarRating";
 import { supabase } from "../../lib/supabase";
 import type { Review } from "../../lib/types";
@@ -67,11 +68,7 @@ export function EditReviewForm({
   return (
     <div>
       <figure>
-        {review.posterUrl ? (
-          <img src={review.posterUrl} alt={review.title} />
-        ) : (
-          <div>포스터 없음</div>
-        )}
+        <MoviePoster posterUrl={review.posterUrl} title={review.title} />
         <figcaption>
           <span>{review.title}</span>
           <span>({review.year})</span>
@@ -83,9 +80,10 @@ export function EditReviewForm({
           value={watchedDate}
           onChange={setWatchedDate}
           error={errors.watchedDate}
+          type="date"
         />
-        <FormField label="별점">
-          <StarRating value={review.rating ?? 0} onChange={setRating} />
+        <FormField label="별점" error={errors.rating}>
+          <StarRating value={rating ?? 0} onChange={setRating} />
         </FormField>
         <Input label="리뷰" value={reviewText} onChange={setReviewText} />
         <Button type="submit" isLoading={submitting}>

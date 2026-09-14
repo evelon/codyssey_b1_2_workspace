@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { Button } from "../../components/ui/Button";
 import { ErrorState } from "../../components/ui/ErrorState";
 import { Loading } from "../../components/ui/Loading";
+import { MoviePoster } from "../../components/ui/MoviePoster";
 import { StarDisplay } from "../../components/ui/StarDisplay";
 import { useReviewDetail } from "../../hooks/useReviewDetail";
 import { supabase } from "../../lib/supabase";
@@ -39,13 +40,9 @@ export function ReviewDetailPage() {
 
   return (
     <article>
-      {review.posterUrl ? (
-        <img src={review.posterUrl} alt={review.title} />
-      ) : (
-        <div>포스터 없음</div>
-      )}
+      <MoviePoster posterUrl={review.posterUrl} title={review.title} />
       <h2>{review.title}</h2>
-      <p>year</p>
+      <p>{review.year}</p>
       <p>
         {review.watchedDate}{" "}
         {review.rating && <StarDisplay value={review.rating} />}

@@ -45,10 +45,15 @@ export function useMovieSearch(): UseMovieSearchResult {
       return;
     }
 
+    const controller = new AbortController();
+
     const timer = setTimeout(() => {
       setLoading(true);
       setError(null);
-      fetch(`https://www.omdbapi.com/?s=${query}&apikey=${omdbApiKey}`)
+      fetch(
+        `https://www.omdbapi.com/?s=${encodeURIComponent(query)}&apikey=${omdbApiKey}`,
+        { signal: controller.signal },
+      )
         .then((res) => res.json())
         .then((data: OmdbSearchResponse) => {
           if (data.Response === "False") {
@@ -64,10 +69,16 @@ export function useMovieSearch(): UseMovieSearchResult {
             })),
           );
         })
-        .catch((error) => setError(String(error)))
+        .catch((error) => {
+          if (error.name === "AbortError") return;
+          setError(String(error));
+        })
         .finally(() => setLoading(false));
     }, 200);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
   }, [query]);
 
   const search = (query: string) => setQuery(query);

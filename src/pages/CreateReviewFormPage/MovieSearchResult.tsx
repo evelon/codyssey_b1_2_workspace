@@ -1,4 +1,5 @@
 import { Card } from "../../components/ui/Card";
+import { MoviePoster } from "../../components/ui/MoviePoster";
 import styles from "./MovieSearchResult.module.css";
 
 type MovieSearchResultProps = {
@@ -7,10 +8,6 @@ type MovieSearchResultProps = {
   posterUrl: string;
   onSelect: () => void;
 };
-
-function hasValidPoster(posterUrl: string) {
-  return posterUrl && posterUrl !== "N/A";
-}
 
 export function MovieSearchResult({
   title,
@@ -22,16 +19,7 @@ export function MovieSearchResult({
     <button className={styles.button} onClick={onSelect}>
       <Card padding="lg">
         <div className={styles.content}>
-          {hasValidPoster(posterUrl) ? (
-            <img
-              className={styles.poster}
-              src={posterUrl}
-              alt={title}
-              loading="lazy"
-            />
-          ) : (
-            <div className={styles.posterPlaceholder}>포스터 없음</div>
-          )}
+          <MoviePoster posterUrl={posterUrl} title={title} />
           <div className={styles.info}>
             <span className={styles.title}>{title}</span>
             <span className={styles.year}>({year})</span>
