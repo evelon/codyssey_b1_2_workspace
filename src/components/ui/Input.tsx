@@ -1,3 +1,4 @@
+import { FormField } from "./FormField";
 import styles from "./Input.module.css";
 
 type InputProps = {
@@ -9,26 +10,15 @@ type InputProps = {
   placeholder?: string;
 };
 
-export function Input({
-  label,
-  value,
-  onChange,
-  error,
-  type = "text",
-  placeholder,
-}: InputProps) {
+export function Input({ label, error, ...inputProps }: InputProps) {
   return (
-    <div className={styles.field}>
-      <label className={styles.label}>{label}</label>
+    <FormField label={label} error={error}>
       <input
-        type={type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className={styles.input}
-        data-error={!!error}
+        {...inputProps}
+        onChange={(e) => {
+          inputProps.onChange(e.target.value);
+        }}
       />
-      <span className={styles.errorText}>{error || "\u00A0"}</span>
-    </div>
+    </FormField>
   );
 }
