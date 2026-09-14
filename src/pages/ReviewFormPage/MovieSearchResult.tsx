@@ -1,5 +1,5 @@
 import { Card } from "../../components/ui/Card";
-import styles from "./MovieSearcResult.module.css";
+import styles from "./MovieSearchResult.module.css";
 
 type MovieSearchResultProps = {
   title: string;
