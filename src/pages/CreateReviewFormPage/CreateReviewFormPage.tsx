@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-import { EmptyState } from "../components/ui/EmptyState";
-import { ErrorState } from "../components/ui/ErrorState";
-import { Input } from "../components/ui/Input";
-import { Loading } from "../components/ui/Loading";
-import { type SearchResult, useMovieSearch } from "../hooks/useMovieSearch";
-import { CreateReviewForm } from "./CreateReviewFormPage/CreateReviewForm";
-import { MovieSearchResult } from "./CreateReviewFormPage/MovieSearchResult";
+import { EmptyState } from "../../components/ui/EmptyState";
+import { ErrorState } from "../../components/ui/ErrorState";
+import { Input } from "../../components/ui/Input";
+import { Loading } from "../../components/ui/Loading";
+import { type SearchResult, useMovieSearch } from "../../hooks/useMovieSearch";
+import { CreateReviewForm } from "./CreateReviewForm";
+import { MovieSearchResult } from "./MovieSearchResult";
 
 export function CreateReviewFormPage() {
   const navigate = useNavigate();

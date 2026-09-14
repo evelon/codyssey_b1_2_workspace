@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from "react-router";
 
-import { ErrorState } from "../components/ui/ErrorState";
-import { Loading } from "../components/ui/Loading";
-import { useReviewDetail } from "../hooks/useReviewDetail";
-import { EditReviewForm } from "./EditReviewFormPage/EditReviewForm";
-import { NotFoundPage } from "./NotFoundPage";
+import { ErrorState } from "../../components/ui/ErrorState";
+import { Loading } from "../../components/ui/Loading";
+import { useReviewDetail } from "../../hooks/useReviewDetail";
+import { EditReviewForm } from "../EditReviewFormPage/EditReviewForm";
+import { NotFoundPage } from "../NotFoundPage";
 
 export function EditReviewFormPage() {
   const navigate = useNavigate();

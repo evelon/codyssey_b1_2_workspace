@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
-import { Button } from "../components/ui/Button";
-import { ErrorState } from "../components/ui/ErrorState";
-import { Loading } from "../components/ui/Loading";
-import { StarDisplay } from "../components/ui/StarDisplay";
-import { useReviewDetail } from "../hooks/useReviewDetail";
-import { supabase } from "../lib/supabase";
+import { Button } from "../../components/ui/Button";
+import { ErrorState } from "../../components/ui/ErrorState";
+import { Loading } from "../../components/ui/Loading";
+import { StarDisplay } from "../../components/ui/StarDisplay";
+import { useReviewDetail } from "../../hooks/useReviewDetail";
+import { supabase } from "../../lib/supabase";
 
 export function ReviewDetailPage() {
   const [deleteError, setDeleteError] = useState<string | null>(null);

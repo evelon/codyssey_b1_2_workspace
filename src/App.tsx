@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 
 import { Layout } from "./components/Layout";
-import { CalendarPage } from "./pages/CalendarPage";
-import { CreateReviewFormPage } from "./pages/CreateReviewFormPage";
-import { EditReviewFormPage } from "./pages/EditReviewFormPage";
+import { CalendarPage } from "./pages/CalendarPage/CalendarPage";
+import { CreateReviewFormPage } from "./pages/CreateReviewFormPage/CreateReviewFormPage";
+import { EditReviewFormPage } from "./pages/EditReviewFormPage/EditReviewFormPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
-import { ReviewDetailPage } from "./pages/ReviewDetailPage";
-import { StatsPage } from "./pages/StatsPage";
+import { ReviewDetailPage } from "./pages/ReviewDetailPage/ReviewDetailPage";
+import { StatsPage } from "./pages/StatsPage/StatsPage";
 
 function App() {
   return (

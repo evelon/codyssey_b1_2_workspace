@@ -10,12 +10,12 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-import { ErrorState } from "../components/ui/ErrorState";
-import { Loading } from "../components/ui/Loading";
-import { useReviews } from "../hooks/useReviews";
-import type { Review } from "../lib/types";
+import { ErrorState } from "../../components/ui/ErrorState";
+import { Loading } from "../../components/ui/Loading";
+import { useReviews } from "../../hooks/useReviews";
+import type { Review } from "../../lib/types";
 import styles from "./CalendarPage.module.css";
-import { ReviewCard } from "./CalendarPage/ReviewCard";
+import { ReviewCard } from "./ReviewCard";
 
 function groupReviewByDate(reviews: Review[]): Record<string, Review[]> {
   const grouped: Record<string, Review[]> = {};
