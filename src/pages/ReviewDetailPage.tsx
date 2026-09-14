@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { Button } from "../components/ui/Button";
 import { ErrorState } from "../components/ui/ErrorState";
 import { Loading } from "../components/ui/Loading";
+import { StarDisplay } from "../components/ui/StarDisplay";
 import { useReviewDetail } from "../hooks/useReviewDetail";
 import { supabase } from "../lib/supabase";
 
@@ -46,7 +47,8 @@ export function ReviewDetailPage() {
       <h2>{review.title}</h2>
       <p>year</p>
       <p>
-        {review.watchedDate} {review.rating && `. ⭐️ ${review.rating}`}
+        {review.watchedDate}{" "}
+        {review.rating && <StarDisplay value={review.rating} />}
       </p>
       {review.reviewText && <p>{review.reviewText}</p>}
       <Button onClick={() => navigate(`/reviews/${id}/edit`)}>수정</Button>

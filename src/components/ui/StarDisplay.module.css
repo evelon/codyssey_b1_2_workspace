@@ -12,5 +12,5 @@
 
 .star[data-filled="false"] {
   color: var(--color-bg);
-  -webkit-text-stroke: 1px;
+  -webkit-text-stroke: 1px var(--color-text);
 }
