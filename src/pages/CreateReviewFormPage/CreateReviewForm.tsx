@@ -2,7 +2,9 @@ import React, { useState } from "react";
 
 import { Button } from "../../components/ui/Button";
 import { ErrorState } from "../../components/ui/ErrorState";
+import { FormField } from "../../components/ui/FormField";
 import { Input } from "../../components/ui/Input";
+import { StarRating } from "../../components/ui/StarRating";
 import { type SearchResult } from "../../hooks/useMovieSearch";
 import { supabase } from "../../lib/supabase";
 
@@ -18,7 +20,7 @@ export function CreateReviewForm({
   onSuccess,
 }: ReviewFormProps) {
   const [watchedDate, setWatchedDate] = useState<string>("");
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState<number | null>(null);
   const [reviewText, setReviewText] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -81,13 +83,9 @@ export function CreateReviewForm({
           error={errors.watchedDate}
           type="date"
         />
-        <Input
-          label="별점"
-          value={rating}
-          onChange={setRating}
-          type="number"
-          error={errors.rating}
-        />
+        <FormField label="별점">
+          <StarRating value={0} onChange={setRating} />
+        </FormField>
         <Input label="리뷰" value={reviewText} onChange={setReviewText} />
         <Button type="submit" isLoading={submitting}>
           저장

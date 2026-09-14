@@ -2,7 +2,9 @@ import React, { useState } from "react";
 
 import { Button } from "../../components/ui/Button";
 import { ErrorState } from "../../components/ui/ErrorState";
+import { FormField } from "../../components/ui/FormField";
 import { Input } from "../../components/ui/Input";
+import { StarRating } from "../../components/ui/StarRating";
 import { supabase } from "../../lib/supabase";
 import type { Review } from "../../lib/types";
 
@@ -18,7 +20,7 @@ export function EditReviewForm({
   onSuccess,
 }: ReviewFormProps) {
   const [watchedDate, setWatchedDate] = useState<string>(review.watchedDate);
-  const [rating, setRating] = useState(String(review.rating ?? ""));
+  const [rating, setRating] = useState(review.rating);
   const [reviewText, setReviewText] = useState(review.reviewText ?? "");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -82,13 +84,9 @@ export function EditReviewForm({
           onChange={setWatchedDate}
           error={errors.watchedDate}
         />
-        <Input
-          label="별점"
-          value={rating}
-          onChange={setRating}
-          type="number"
-          error={errors.rating}
-        />
+        <FormField label="별점">
+          <StarRating value={review.rating ?? 0} onChange={setRating} />
+        </FormField>
         <Input label="리뷰" value={reviewText} onChange={setReviewText} />
         <Button type="submit" isLoading={submitting}>
           저장
