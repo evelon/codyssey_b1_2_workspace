@@ -3,6 +3,7 @@
   border: transparent;
   cursor: pointer;
   font-size: 20px;
+  padding: 2px;
 }
 
 .star[data-filled="true"] {
@@ -11,5 +12,5 @@
 
 .star[data-filled="false"] {
   color: var(--color-bg);
-  -webkit-text-stroke: 1px;
+  -webkit-text-stroke: 1px var(--color-text);
 }
