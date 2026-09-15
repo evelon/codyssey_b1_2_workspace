@@ -1,3 +1,5 @@
+import { useId } from "react";
+
 import { FormField } from "./FormField";
 import styles from "./Input.module.css";
 type InputProps = {
@@ -10,9 +12,11 @@ type InputProps = {
 };
 
 export function Input({ label, error, ...inputProps }: InputProps) {
+  const id = useId();
   return (
-    <FormField label={label} error={error}>
+    <FormField label={label} error={error} htmlFor={id}>
       <input
+        id={id}
         className={styles.input}
         data-error={!!error}
         {...inputProps}

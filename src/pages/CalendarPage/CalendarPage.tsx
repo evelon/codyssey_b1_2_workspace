@@ -5,6 +5,7 @@ import {
   endOfWeek,
   format,
   isSameMonth,
+  isToday,
   startOfMonth,
   startOfWeek,
   subMonths,
@@ -12,12 +13,15 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
+import { Button } from "../../components/ui/Button";
 import { ErrorState } from "../../components/ui/ErrorState";
 import { Loading } from "../../components/ui/Loading";
 import { useReviews } from "../../hooks/useReviews";
 import type { Review } from "../../lib/types";
 import styles from "./CalendarPage.module.css";
 import { ReviewCard } from "./ReviewCard";
+
+const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
 
 function groupReviewByDate(reviews: Review[]): Record<string, Review[]> {
   const grouped: Record<string, Review[]> = {};
@@ -48,21 +52,30 @@ export function CalendarPage() {
   const groupedReview = groupReviewByDate(reviews);
 
   return (
-    <>
-      <div>
-        <button
-          type="button"
+    <div className={styles.page}>
+      <div className={styles.header}>
+        <Button
+          variant="secondary"
           onClick={() => setCurrentDate(subMonths(currentDate, 1))}
         >
           이전 달
-        </button>
-        <span>{format(currentDate, "yyyy년 M월")}</span>
-        <button
-          type="button"
+        </Button>
+        <h2 className={styles.monthLabel}>
+          {format(currentDate, "yyyy년 M월")}
+        </h2>
+        <Button
+          variant="secondary"
           onClick={() => setCurrentDate(addMonths(currentDate, 1))}
         >
           다음 달
-        </button>
+        </Button>
+      </div>
+      <div className={styles.weekdays}>
+        {WEEKDAYS.map((day) => (
+          <span key={day} className={styles.weekday}>
+            {day}
+          </span>
+        ))}
       </div>
       <ul className={styles.calendar}>
         {days.map((day) => {
@@ -71,22 +84,28 @@ export function CalendarPage() {
           return (
             <li
               key={dayKey}
+              className={styles.day}
               data-outside-month={!isSameMonth(day, currentDate)}
             >
-              <span>{format(day, "d")}</span>
-              {reviewsOnThisDay.map((review) => {
-                return (
-                  <ReviewCard
-                    key={review.id}
-                    review={review}
-                    onClick={() => navigate(`/reviews/${review.id}`)}
-                  />
-                );
-              })}
+              <span className={styles.dayNumber} data-today={isToday(day)}>
+                {format(day, "d")}
+              </span>
+              <div className={styles.reviews}>
+                {reviewsOnThisDay.map((review) => {
+                  return (
+                    <ReviewCard
+                      key={review.id}
+                      review={review}
+                      variant="compact"
+                      onClick={() => navigate(`/reviews/${review.id}`)}
+                    />
+                  );
+                })}
+              </div>
             </li>
           );
         })}
       </ul>
-    </>
+    </div>
   );
 }

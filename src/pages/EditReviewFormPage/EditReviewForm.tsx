@@ -8,6 +8,7 @@ import { MoviePoster } from "../../components/ui/MoviePoster";
 import { StarRating } from "../../components/ui/StarRating";
 import { supabase } from "../../lib/supabase";
 import type { Review } from "../../lib/types";
+import styles from "./EditReviewForm.module.css";
 
 type ReviewFormProps = {
   review: Review;
@@ -66,15 +67,19 @@ export function EditReviewForm({
   }
 
   return (
-    <div>
-      <figure>
-        <MoviePoster posterUrl={review.posterUrl} title={review.title} />
-        <figcaption>
-          <span>{review.title}</span>
-          <span>({review.year})</span>
+    <div className={styles.page}>
+      <figure className={styles.movieSummary}>
+        <MoviePoster
+          posterUrl={review.posterUrl}
+          title={review.title}
+          size="md"
+        />
+        <figcaption className={styles.movieInfo}>
+          <span className={styles.movieTitle}>{review.title}</span>
+          <span className={styles.movieYear}>({review.year})</span>
         </figcaption>
       </figure>
-      <form onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <Input
           label="영화 본 날짜"
           value={watchedDate}
@@ -86,12 +91,14 @@ export function EditReviewForm({
           <StarRating value={rating ?? 0} onChange={setRating} />
         </FormField>
         <Input label="리뷰" value={reviewText} onChange={setReviewText} />
-        <Button type="submit" isLoading={submitting}>
-          저장
-        </Button>
-        <Button type="button" variant="secondary" onClick={onCancel}>
-          취소
-        </Button>
+        <div className={styles.actions}>
+          <Button type="submit" isLoading={submitting}>
+            저장
+          </Button>
+          <Button type="button" variant="secondary" onClick={onCancel}>
+            취소
+          </Button>
+        </div>
       </form>
       {submitError && <ErrorState message={submitError} />}
     </div>

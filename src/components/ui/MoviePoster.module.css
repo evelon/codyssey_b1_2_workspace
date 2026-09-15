@@ -1,0 +1,42 @@
+.poster,
+.placeholder {
+  aspect-ratio: 2 / 3;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.poster {
+  object-fit: cover;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  background-color: var(--color-border);
+}
+
+.poster[data-size="xs"],
+.placeholder[data-size="xs"] {
+  width: 28px;
+  font-size: 8px;
+}
+
+.poster[data-size="sm"],
+.placeholder[data-size="sm"] {
+  width: 56px;
+}
+
+.poster[data-size="md"],
+.placeholder[data-size="md"] {
+  width: 96px;
+}
+
+.poster[data-size="lg"],
+.placeholder[data-size="lg"] {
+  width: 160px;
+}

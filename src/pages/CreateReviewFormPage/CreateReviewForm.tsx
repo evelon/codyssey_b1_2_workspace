@@ -8,6 +8,7 @@ import { MoviePoster } from "../../components/ui/MoviePoster";
 import { StarRating } from "../../components/ui/StarRating";
 import { type SearchResult } from "../../hooks/useMovieSearch";
 import { supabase } from "../../lib/supabase";
+import styles from "./CreateReviewForm.module.css";
 
 type ReviewFormProps = {
   movie: SearchResult;
@@ -68,15 +69,15 @@ export function CreateReviewForm({
   }
 
   return (
-    <div>
-      <figure>
-        <MoviePoster posterUrl={movie.posterUrl} title={movie.title} />
-        <figcaption>
-          <span>{movie.title}</span>
-          <span>({movie.year})</span>
+    <div className={styles.page}>
+      <figure className={styles.movieSummary}>
+        <MoviePoster posterUrl={movie.posterUrl} title={movie.title} size="md" />
+        <figcaption className={styles.movieInfo}>
+          <span className={styles.movieTitle}>{movie.title}</span>
+          <span className={styles.movieYear}>({movie.year})</span>
         </figcaption>
       </figure>
-      <form onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <Input
           label="영화 본 날짜"
           value={watchedDate}
@@ -87,13 +88,20 @@ export function CreateReviewForm({
         <FormField label="별점" error={errors.rating}>
           <StarRating value={rating ?? 0} onChange={setRating} />
         </FormField>
-        <Input label="리뷰" value={reviewText} onChange={setReviewText} />
-        <Button type="submit" isLoading={submitting}>
-          저장
-        </Button>
-        <Button type="button" variant="secondary" onClick={onCancel}>
-          취소
-        </Button>
+        <Input
+          label="리뷰"
+          placeholder="영화에 대한 감상을 남겨보세요"
+          value={reviewText}
+          onChange={setReviewText}
+        />
+        <div className={styles.actions}>
+          <Button type="submit" isLoading={submitting}>
+            저장
+          </Button>
+          <Button type="button" variant="secondary" onClick={onCancel}>
+            취소
+          </Button>
+        </div>
       </form>
       {submitError && <ErrorState message={submitError} />}
     </div>

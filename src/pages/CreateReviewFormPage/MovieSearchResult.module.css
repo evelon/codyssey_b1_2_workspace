@@ -1,40 +1,29 @@
 .button {
   all: unset;
+  display: block;
+  width: 100%;
+  cursor: pointer;
 }
+
 .content {
   display: flex;
-}
-
-.poster {
-  width: 60px;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.posterPlaceholder {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 10px;
-  color: var(--color-text-muted);
-  background-color: var(--color-border);
-  width: 60px;
-  aspect-ratio: 2 / 3;
-  border-radius: 4px;
+  gap: 12px;
 }
 
 .info {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  padding: 20px;
+  gap: 4px;
 }
 
 .title {
+  font-size: 15px;
+  font-weight: 600;
   color: var(--color-text);
 }
 
 .year {
+  font-size: 13px;
   color: var(--color-text-muted);
 }

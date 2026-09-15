@@ -19,7 +19,7 @@ export function MovieSearchResult({
     <button className={styles.button} onClick={onSelect}>
       <Card padding="lg">
         <div className={styles.content}>
-          <MoviePoster posterUrl={posterUrl} title={title} />
+          <MoviePoster posterUrl={posterUrl} title={title} size="sm" />
           <div className={styles.info}>
             <span className={styles.title}>{title}</span>
             <span className={styles.year}>({year})</span>

@@ -7,6 +7,7 @@ import { Input } from "../../components/ui/Input";
 import { Loading } from "../../components/ui/Loading";
 import { type SearchResult, useMovieSearch } from "../../hooks/useMovieSearch";
 import { CreateReviewForm } from "./CreateReviewForm";
+import styles from "./CreateReviewFormPage.module.css";
 import { MovieSearchResult } from "./MovieSearchResult";
 
 export function CreateReviewFormPage() {
@@ -25,16 +26,18 @@ export function CreateReviewFormPage() {
       }}
     />
   ) : (
-    <>
+    <div className={styles.page}>
+      <h2 className={styles.heading}>리뷰 작성</h2>
       <Input
         label="영화 제목"
+        placeholder="영화 제목을 검색하세요"
         value={keyword}
         onChange={(value) => {
           setKeyword(value);
           search(value);
         }}
       />
-      <div>
+      <div className={styles.results}>
         {loading && <Loading />}
         {error && <ErrorState message={error} />}
         {!loading && !error && results.length === 0 && keyword && (
@@ -50,6 +53,6 @@ export function CreateReviewFormPage() {
             />
           ))}
       </div>
-    </>
+    </div>
   );
 }

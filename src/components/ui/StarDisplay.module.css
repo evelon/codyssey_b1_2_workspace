@@ -1,9 +1,13 @@
 .star {
   background-color: transparent;
   border: transparent;
-  cursor: pointer;
   font-size: 20px;
   padding: 2px;
+}
+
+.star[data-size="sm"] {
+  font-size: 11px;
+  padding: 0;
 }
 
 .star[data-filled="true"] {

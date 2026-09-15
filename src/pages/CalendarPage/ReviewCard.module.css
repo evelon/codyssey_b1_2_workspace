@@ -1,0 +1,62 @@
+.button {
+  all: unset;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.card {
+  transition:
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.button:hover .card {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.title {
+  width: 100%;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.compactButton {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 2px 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.compactButton:hover {
+  background-color: var(--color-bg-page);
+}
+
+.compactTitle {
+  flex: 1;
+  min-width: 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,8 +1,80 @@
-.calendar {
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.monthLabel {
+  min-width: 140px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 }
 
-.calendar li[data-outside-month="true"] {
+.weekday {
+  padding: 4px 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.day {
+  height: 112px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.day[data-outside-month="true"] {
   opacity: 0.4;
+}
+
+.dayNumber {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text);
+  border-radius: 50%;
+}
+
+.dayNumber[data-today="true"] {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.reviews {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
 }

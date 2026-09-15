@@ -8,6 +8,7 @@ import { MoviePoster } from "../../components/ui/MoviePoster";
 import { StarDisplay } from "../../components/ui/StarDisplay";
 import { useReviewDetail } from "../../hooks/useReviewDetail";
 import { supabase } from "../../lib/supabase";
+import styles from "./ReviewDetailPage.module.css";
 
 export function ReviewDetailPage() {
   const [deleteError, setDeleteError] = useState<string | null>(null);
@@ -39,24 +40,36 @@ export function ReviewDetailPage() {
   }
 
   return (
-    <article>
-      <MoviePoster posterUrl={review.posterUrl} title={review.title} />
-      <h2>{review.title}</h2>
-      <p>{review.year}</p>
-      <p>
-        {review.watchedDate}{" "}
-        {review.rating && <StarDisplay value={review.rating} />}
-      </p>
-      {review.reviewText && <p>{review.reviewText}</p>}
-      <Button onClick={() => navigate(`/reviews/${id}/edit`)}>수정</Button>
-      <Button
-        variant="danger"
-        onClick={() => {
-          if (confirm("정말 삭제하시겠습니까?")) handleDelete();
-        }}
-      >
-        삭제
-      </Button>
+    <article className={styles.page}>
+      <div className={styles.hero}>
+        <MoviePoster
+          posterUrl={review.posterUrl}
+          title={review.title}
+          size="lg"
+        />
+        <div className={styles.info}>
+          <h2 className={styles.title}>{review.title}</h2>
+          {review.year && <p className={styles.year}>{review.year}</p>}
+          <div className={styles.meta}>
+            <span>{review.watchedDate}</span>
+            {review.rating !== null && <StarDisplay value={review.rating} />}
+          </div>
+        </div>
+      </div>
+      {review.reviewText && (
+        <p className={styles.reviewText}>{review.reviewText}</p>
+      )}
+      <div className={styles.actions}>
+        <Button onClick={() => navigate(`/reviews/${id}/edit`)}>수정</Button>
+        <Button
+          variant="danger"
+          onClick={() => {
+            if (confirm("정말 삭제하시겠습니까?")) handleDelete();
+          }}
+        >
+          삭제
+        </Button>
+      </div>
       {deleteError && <ErrorState message={deleteError} />}
     </article>
   );

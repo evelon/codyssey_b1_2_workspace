@@ -27,3 +27,5 @@ dist-ssr
 subject.md
 
 supabase
+.vercel
+.env*
